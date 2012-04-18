@@ -10,3 +10,5 @@ REMI will
 - Utilize RESTful services
 - Server will designed to run on a mac
 - Make calls from Groovy to Applescript
+
+Project Wiki: http://thegrid.wikidot.com/remi

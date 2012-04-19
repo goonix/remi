@@ -12,8 +12,14 @@ class Remote {
         fullName empty: false
     }
 
+    static transients = ['displayName']
+
     //does "displayName" need to be label transient?
     public String getDisplayName() {
         return ((null != commonName) ? commonName : fullName)
+    }
+
+    public String toString() {
+        return getDisplayName()
     }
 }

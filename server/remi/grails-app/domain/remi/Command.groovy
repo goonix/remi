@@ -4,10 +4,14 @@ class Command {
 
     String name
 
-    static belongsTo = [author: Author]
+    static belongsTo = [remote: Remote]
 
     static constraints = {
         name nullable: false
         name empty: false
+    }
+
+    public String toString() {
+        return name
     }
 }

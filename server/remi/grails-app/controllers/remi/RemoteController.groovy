@@ -104,8 +104,14 @@ class RemoteController {
         if (!remoteInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'remote.label', default: 'Remote'), params.id])}"
             redirect(action: "list")
-        }
-        else {
+        } 
+
+        def encodedResourceName = "${remoteInstance.fullName.encodeURL()}"
+        def resourcePath = "../remoteViews/${encodedResourceName}"
+
+        if(viewExists(resourcePath)) { //check for custom view specific to this remote
+            render(view: "${resourcePath}", model: [remoteInstance: remoteInstance])
+        } else { //otherwise, render default
             [remoteInstance: remoteInstance]
         }
     }
@@ -198,5 +204,21 @@ class RemoteController {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'remote.label', default: 'Remote'), params.id])}"
             redirect(action: "list")
         }
+    }
+
+    //helper methods
+    //def resExists(resName, isView) {
+    def viewExists(viewName) {
+        //Not needed : def grailsAttributes = new DefaultGrailsApplicationAttributes(request.servletContext)
+        def engine = grailsAttributes.pagesTemplateEngine
+        def resUri = grailsAttributes.getViewUri(viewName, request)
+        def resource = engine.getResourceForUri(resUri)
+        log.debug "resource=${resource}; exists=${resource?.file && resource?.exists()};"
+        return resource?.file && resource?.exists()
+    }
+
+    def resourceExists(resPath) {
+        def resFile = grailsApplication.parentContext.getResource(resPath)
+        resFile?.exists()
     }
 }

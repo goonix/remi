@@ -16,7 +16,12 @@ class BootStrap {
                 new Remote(fullName: "Harmon Kardon-20120411-203045", commonName: "AVR Tuner").save(failOnError: true)
             def command1 = new Command(remote: remote1, name: "ON").save(failOnError: true)
             */
-
+        String.metaClass.encodeURL = {
+               java.net.URLEncoder.encode(delegate, "UTF-8")
+        }
+        String.metaClass.decodeURL = {
+               java.net.URLEncoder.decode(delegate, "UTF-8")
+        }
         //setup script engine
         ScriptEngineManager mgr = new ScriptEngineManager()
         ScriptEngine engine = mgr.getEngineByName("AppleScript")

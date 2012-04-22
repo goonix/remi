@@ -13,7 +13,7 @@ class RemoteController {
     }
 
     //execute a command
-    def execute = {
+    def execute_old = {
         //def remoteInstance = Remote.get(params.id)
         //if (remoteInstance?
 
@@ -72,6 +72,31 @@ class RemoteController {
         println script
 
         redirect(action: "list", params: params)
+    }
+
+    def execute = {
+        def remoteInstance = Remote.get(params.id)
+        def command = params.command
+
+        //def remoteInstance = Remote.get(1)
+        //println remoteInstance.properties
+        //println remoteInstance.properties.commands
+
+        ScriptEngineManager mgr = new ScriptEngineManager()
+        ScriptEngine engine = mgr.getEngineByName("AppleScript")
+
+        def script = """
+        tell application "IR-FBA"
+           send button "${command}" of remote "${remoteInstance.fullName}"
+        end tell"""
+
+        println script
+
+        engine.eval(script);
+
+        //def params;
+        //params.id = 
+        //redirect(action: "list", params: params)
     }
 
     def showremote = {

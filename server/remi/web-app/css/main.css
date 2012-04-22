@@ -271,3 +271,17 @@ th.desc a {
     background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
+.commandbutton {
+    background: #98FB98;
+    border: solid black 1px;
+}
+/*.commandbutton a:link, .commandbutton a:visited, .commandbutton a:hover, .commandbutton a:active {*/
+a:link, a:visited, a:hover, a:active {
+    color: black;
+    font-weight: bold;
+    padding: .25em .5em .25em .5em;
+}
+.commandtable tr {
+    padding-top: .5em;
+    margin: 1em .5em 1em .5em;
+}

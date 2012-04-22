@@ -2,10 +2,35 @@
 <%@ page import="remi.Remote" %>
 <html>
     <head>
+        <g:javascript library="prototype" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'remote.label', default: 'Remote')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <script>
+        /*
+        function loadHotels(){
+            var url = "${createLink(controller:'hotel', action:'near')}"
+                url += "?lat=" + airportMarkers[1].getLatLng().lat()
+                url += "&lng=" + airportMarkers[1].getLatLng().lng()
+            new Ajax.Request(url,{
+                    onSuccess: function(req) { showHotels(req) },
+                    onFailure: function(req) { displayError(req) }
+                })
+        }
+        */
+        function executeCommand(command){
+            var url = "${createLink(controller:'remote', action:'execute')}"
+                url += "?id=" + "${remoteInstance.id}"
+                url += "&command=" + command;
+            new Ajax.Request(url,{
+                onSuccess: function(req) { alert("SUCCESS") },
+                onFailure: function(req) { alert("DENIED") }
+            })
+
+            return false;
+        }
+        </script>
     </head>
     <body>
         <div class="nav">
@@ -23,13 +48,6 @@
                     <tbody>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="remote.id.label" default="Id" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: remoteInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="remote.fullName.label" default="Full Name" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: remoteInstance, field: "fullName")}</td>
@@ -40,11 +58,11 @@
                             <td valign="top" class="name"><g:message code="remote.commands.label" default="Commands" /></td>
                             
                             <td valign="top" style="text-align: left;" class="value">
-                                <ul>
+                                <table class="commandtable">
                                 <g:each in="${remoteInstance.commands}" var="c">
-                                    <li><g:link controller="command" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
+                                    <tr><td><g:link onclick="return executeCommand('${c.name}');" class="commandbutton">${c?.encodeAsHTML()}</g:link></td></tr>
                                 </g:each>
-                                </ul>
+                                </table>
                             </td>
                             
                         </tr>

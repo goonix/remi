@@ -272,14 +272,22 @@ th.desc a {
     padding-left: 28px;
 }
 .commandbutton {
+    /*
     background: #98FB98;
     border: solid black 1px;
+    */
+    background: #fff url(../images/skin/shadow.jpg);
+    padding-left: 28px;
+    border: solid #ccc 1px
 }
 /*.commandbutton a:link, .commandbutton a:visited, .commandbutton a:hover, .commandbutton a:active {*/
 a:link, a:visited, a:hover, a:active {
     color: black;
     font-weight: bold;
     padding: .25em .5em .25em .5em;
+}
+a:hover, a:active {
+    color: #ccc;
 }
 .commandtable tr {
     padding-top: .5em;

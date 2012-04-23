@@ -23,6 +23,7 @@
                         <tr>
                         
                             <g:sortableColumn property="id" title="${message(code: 'remote.id.label', default: 'Id')}" />
+                            <th>Remote</th>
                         
                             <g:sortableColumn property="fullName" title="${message(code: 'remote.fullName.label', default: 'Full Name')}" />
                         
@@ -35,6 +36,7 @@
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
                             <td><g:link action="show" id="${remoteInstance.id}">${fieldValue(bean: remoteInstance, field: "id")}</g:link></td>
+                            <td><g:link action="showremote" id="${remoteInstance.id}">REM</g:link></td>
                         
                             <td>${fieldValue(bean: remoteInstance, field: "fullName")}</td>
                         
